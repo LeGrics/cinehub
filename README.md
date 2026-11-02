@@ -2,11 +2,11 @@
 
 Un accueil TV avec quatre plateformes : **Movy, Cinejoy, 7movies et Bingebox**. Choisir une tuile ouvre directement l'accueil du site. Après installation, aucun PC n'est nécessaire.
 
-L'application s'appelait Movy TV. Son identifiant reste `org.personal.movytv` pour permettre une mise à jour de l'installation existante ; son nom dans l'accueil LG devient **CinéHub**. Le dépôt conserve son adresse `lg-movy`.
+L'application s'appelait Movy TV. Son identifiant reste `org.personal.movytv` pour permettre une mise à jour de l'installation existante ; son nom dans l'accueil LG devient **CinéHub**. Le dépôt est disponible à l’adresse `LeGrics/cinehub`.
 
 ## Installation
 
-**[Télécharger CinéHub 0.4.0 (.ipk)](https://github.com/LeGrics/lg-movy/raw/refs/heads/main/packages/org.personal.movytv_0.4.0_all.ipk)**
+**[Télécharger CinéHub 0.4.0 (.ipk)](https://github.com/LeGrics/cinehub/raw/refs/heads/main/packages/org.personal.movytv_0.4.0_all.ipk)**
 
 **[Guide pour activer Developer Mode et installer l'application](docs/INSTALLATION-LG.md)**
 

@@ -1,0 +1,24 @@
+name: tvOS build
+on:
+  push:
+    paths:
+      - 'tvos/**'
+      - '.github/workflows/tvos-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - name: Read the exact public commit
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          git init .
+          git remote add origin https://github.com/LeGrics/cinehub.git
+          git fetch --depth=1 origin "$COMMIT_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Run Swift tests and build for Apple TV Simulator
+        run: sh tvos/scripts/check-macos.sh

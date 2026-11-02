@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-02",
+  "xcodeProject": {
+    "parsed": true,
+    "sourceFiles": 3,
+    "compiled": false
+  },
+  "catalogDataContracts": {
+    "movy": {
+      "status": 200,
+      "uniqueTitles": 105
+    },
+    "sevenMovies": {
+      "status": 200,
+      "uniqueTitles": 218
+    },
+    "cinejoy": {
+      "status": 200,
+      "initialPage": "client-rendered shell",
+      "nativeAdapter": false
+    }
+  },
+  "playback": {
+    "sevenMoviesTokenProbe": 403,
+    "sevenMoviesError": "Invalid playback request.",
+    "sitePlaybackValidated": false,
+    "swiftTestsExecuted": false,
+    "appleSample": {
+      "status": 200,
+      "isHLS": true
+    }
+  }
+}

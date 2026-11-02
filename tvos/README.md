@@ -1,6 +1,6 @@
 # CinéHub pour Apple TV — prototype natif 0.1.0
 
-Ce projet est une base de portage tvOS, pas l'équivalent fonctionnel de la version LG. Il ne lit pas encore les films et séries des plateformes. Aucun paquet Apple TV signé ni aucune compilation Xcode validée n'est fourni à ce stade.
+Ce projet est une base de portage tvOS, pas l'équivalent fonctionnel de la version LG. Il ne lit pas encore les films et séries des plateformes. La compilation Xcode pour le simulateur Apple TV et les six tests Swift ont réussi sur un runner macOS GitHub Actions. Aucun paquet signé pour un Apple TV réel n’est fourni.
 
 ## Ce qui est implémenté
 
@@ -27,7 +27,9 @@ Pour vérifier les tests du parseur et compiler sans signature pour le simulateu
 sh scripts/check-macos.sh
 ```
 
-Windows ne fournit pas Xcode ni le SDK tvOS. Les six tests Swift sont fournis, mais n'ont pas été exécutés dans cet environnement Windows. Le fichier de projet et les contrats des catalogues ont fait l'objet de vérifications locales distinctes ; cela ne vaut pas une compilation.
+Windows ne fournit pas Xcode ni le SDK tvOS. Le dépôt utilise une machine macOS de GitHub Actions pour exécuter les six tests Swift et compiler l’application pour le simulateur, sans signature ni secret Apple. [Compilation et tests réussis](https://github.com/LeGrics/cinehub/actions/runs/41459827721). Cette vérification ne prouve pas la lecture des sites ni le fonctionnement sur un Apple TV réel.
+
+Le code est publié dans `tvos/` du dépôt LeGrics/cinehub, et le workflow dans `.github/workflows/tvos-check.yml` à la racine du dépôt. La copie `.github/` de cette archive correspond à cet emplacement à la racine, au-dessus de `tvos/`. Les changements de code tvOS déclenchent une vérification automatique. Pour distribuer une application à un Apple TV réel, il faudra une signature et un canal Apple appropriés (par exemple TestFlight avec un compte Apple Developer). Aucun abonnement ou service payant n’est activé par ce projet.
 
 ## Pourquoi la lecture des plateformes reste à faire
 

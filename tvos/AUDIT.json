@@ -3,7 +3,9 @@
   "xcodeProject": {
     "parsed": true,
     "sourceFiles": 3,
-    "compiled": false
+    "compiled": true,
+    "target": "tvOS Simulator",
+    "ciRun": "https://github.com/LeGrics/cinehub/actions/runs/41459827721"
   },
   "catalogDataContracts": {
     "movy": {
@@ -24,10 +26,14 @@
     "sevenMoviesTokenProbe": 403,
     "sevenMoviesError": "Invalid playback request.",
     "sitePlaybackValidated": false,
-    "swiftTestsExecuted": false,
+    "swiftTestsExecuted": true,
     "appleSample": {
       "status": 200,
       "isHLS": true
     }
+  },
+  "swiftTests": {
+    "passed": 6,
+    "failed": 0
   }
 }

@@ -72,3 +72,7 @@ Les améliorations sont limitées aux domaines explicitement listés et au docum
 Projet indépendant, sans affiliation avec LG ou les plateformes. Aucun contenu vidéo, mot de passe, passphrase Developer Mode ou configuration personnelle de TV n'est inclus.
 
 Les favicons de Movy, Cinejoy et 7movies proviennent des sites concernés.
+
+## Apple TV / tvOS
+
+Une base native est disponible dans [tvos/](tvos/README.md). La compilation pour le simulateur Apple TV et les six tests Swift passent via GitHub Actions, utilisable depuis Windows. La lecture des films des plateformes et la distribution signée pour un appareil réel restent à intégrer. Ce prototype ne remplace pas l’application LG.

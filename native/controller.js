@@ -14,6 +14,11 @@
     dockTimer=setTimeout(hideDock,3500);
   }
   function installScroller(){
+    // App Router replaces streamed main elements. Keep its DOM ownership intact.
+    if(cineHubPlatform.scrollMode==='document'){
+      document.documentElement.setAttribute('data-cinehub-document','');
+      scroller=document.scrollingElement||document.documentElement;return true;
+    }
     var next=null;cineHubPlatform.roots.some(function(selector){next=document.querySelector(selector);return !!next;});
     if(!next)return false;
     scroller=document.getElementById('movy-tv-scroll');
@@ -32,7 +37,7 @@
   function toggle(){panel.hidden=!panel.hidden;if(!panel.hidden){showDock(false);panel.querySelector('button').focus();}else{var first=lastContentFocus&&lastContentFocus.isConnected?lastContentFocus:items(document).find(function(el){return !panel.contains(el)&&!dock.contains(el);});if(first)first.focus({preventScroll:true});showDock(false);}}
   function media(){return [].slice.call(document.querySelectorAll('video')).find(visible);}
   function scrollPage(target,dx,dy){
-    var root=scroller||document.scrollingElement||document.documentElement,el=target&&target.nodeType===1?target:null;
+    var root=scroller&&scroller.isConnected?scroller:document.scrollingElement||document.documentElement,el=target&&target.nodeType===1?target:null;
     while(el&&el!==root){
       var style=getComputedStyle(el),oldX=el.scrollLeft,oldY=el.scrollTop;
       if(dx&&/auto|scroll/.test(style.overflowX))el.scrollLeft+=dx;

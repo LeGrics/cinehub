@@ -1,6 +1,6 @@
 {
   "id": "org.personal.movytv",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "vendor": "Personal project",
   "type": "web",
   "main": "index.html",

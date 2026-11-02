@@ -34,9 +34,9 @@ npm run build
 npx ares-config --profile tv
 ```
 
-Le build crée `dist/org.personal.movytv_0.4.0_all.ipk`. Si un IPK compilé est fourni séparément, il peut aussi être utilisé directement avec les outils LG déjà installés.
+Le build crée `dist/org.personal.movytv_0.4.1_all.ipk`. Si un IPK compilé est fourni séparément, il peut aussi être utilisé directement avec les outils LG déjà installés.
 
-Un paquet déjà compilé est fourni dans `packages/org.personal.movytv_0.4.0_all.ipk`. Pour l'utiliser, installer les outils avec `npm ci`, sélectionner le profil TV, puis remplacer le chemin `dist/…` par `packages/…` dans la commande d'installation. Les étapes `npm test` et `npm run build` ne sont nécessaires que pour reconstruire/valider les sources.
+Un paquet déjà compilé est fourni dans `packages/org.personal.movytv_0.4.1_all.ipk`. Pour l'utiliser, installer les outils avec `npm ci`, sélectionner le profil TV, puis remplacer le chemin `dist/…` par `packages/…` dans la commande d'installation. Les étapes `npm test` et `npm run build` ne sont nécessaires que pour reconstruire/valider les sources.
 
 ## 4. Enregistrer la TV sur le PC
 
@@ -66,7 +66,7 @@ Saisir la passphrase affichée sur la TV quand l'outil la demande. Si le PC ne t
 ## 5. Installer et lancer Movy TV
 
 ```powershell
-npx ares-install --device tv dist/org.personal.movytv_0.4.0_all.ipk
+npx ares-install --device tv dist/org.personal.movytv_0.4.1_all.ipk
 npx ares-launch --device tv org.personal.movytv
 ```
 

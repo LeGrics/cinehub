@@ -1,5 +1,13 @@
 # Versions
 
+## 0.4.1 — Correctifs 7movies et accès bloqué
+
+- 7movies : défilement du document entier, sans déplacer un `main` provisoire que Next.js remplace ensuite.
+- Préférence publicitaire appliquée avec un seul rechargement de remise à zéro par session 7movies.
+- Blocage ciblé des deux chargeurs publicitaires identifiés (`/r7.js` et `oa.ingangupbelt.com`) lorsque le réglage natif est désactivé. Les lecteurs tiers restent hors de ce blocage.
+- Bingebox : limite Cloudflare indiquée sur la tuile ; bandeau pour changer de plateforme sur la page de vérification. Aucun contournement ni validation du lecteur.
+- Tests locaux : 14 tests automatisés, défilement après remplacement du catalogue dans une simulation navigateur. Validation C5 encore nécessaire.
+
 ## 0.4.0 — CinéHub
 
 - Nouveau nom dans l'accueil LG : CinéHub ; identifiant conservé pour la mise à jour.

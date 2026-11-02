@@ -10,8 +10,10 @@ function context({host='www.movy.sx',frame=false,setting=null,title=''}={}){
   // Keep controller initialization deferred; the storage/bootstrap contract is tested here.
   document.readyState='loading';
   const window={addEventListener(){}};window.top=frame?{}:window;
-  const scope={window,document,location:{protocol:'https:',hostname:host},sessionStorage:{getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,v)},localStorage:{getItem:k=>local.has(k)?local.get(k):null,setItem:(k,v)=>local.set(k,v)}};
-  return{scope,store,local,listeners,styles};
+  const reloads=[];
+  class Node {appendChild(n){return n;}insertBefore(n){return n;}replaceChild(n){return n;}}
+  const scope={Node,URL,window,document,location:{protocol:'https:',hostname:host,href:'https://'+host+'/',origin:'https://'+host,reload:()=>reloads.push(true)},sessionStorage:{getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,v)},localStorage:{getItem:k=>local.has(k)?local.get(k):null,setItem:(k,v)=>local.set(k,v)}};
+  return{scope,store,local,listeners,styles,reloads};
 }
 test('native script defaults the real Movy session to ads off and contains autonomous controls',()=>{
   const ctx=context();vm.runInNewContext(bundle,ctx.scope);assert.equal(ctx.store.get('ads-enabled-session'),'false');assert.equal(ctx.styles.length,1);assert.ok(ctx.listeners.DOMContentLoaded);assert.equal(ctx.scope.window.__movyTvInstalled,true);
@@ -30,6 +32,8 @@ test('Cinejoy uses its own native local preference rather than the Movy key',()=
 });
 test('7movies uses its verified native session ad-free preference',()=>{
   const ctx=context({host:'7movies.ac'});vm.runInNewContext(bundle,ctx.scope);assert.equal(ctx.store.get('cinrift_ad_free'),'true');assert.equal(ctx.store.has('ads-enabled-session'),false);
+  assert.equal(ctx.reloads.length,1);assert.equal(ctx.styles.length,0);
+  vm.runInNewContext(bundle,ctx.scope);assert.equal(ctx.reloads.length,1);assert.equal(ctx.styles.length,1);
 });
 test('Bingebox security verification is left untouched',()=>{
   const ctx=context({host:'bingebox.ac',title:'Just a moment...'});vm.runInNewContext(bundle,ctx.scope);ctx.listeners.DOMContentLoaded();assert.equal(ctx.styles.length,0);assert.equal(ctx.scope.window.__movyTvInstalled,undefined);assert.equal(ctx.store.size,0);

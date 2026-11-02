@@ -6,7 +6,7 @@ L'application s'appelait Movy TV. Son identifiant reste `org.personal.movytv` po
 
 ## Installation
 
-**[Télécharger CinéHub 0.4.0 (.ipk)](https://github.com/LeGrics/cinehub/raw/refs/heads/main/packages/org.personal.movytv_0.4.0_all.ipk)**
+**[Télécharger CinéHub 0.4.1 (.ipk)](https://github.com/LeGrics/cinehub/raw/refs/heads/main/packages/org.personal.movytv_0.4.1_all.ipk)**
 
 **[Guide pour activer Developer Mode et installer l'application](docs/INSTALLATION-LG.md)**
 
@@ -21,7 +21,7 @@ npm run build
 Une fois la TV enregistrée sous le nom `tv` :
 
 ```powershell
-npx ares-install --device tv packages/org.personal.movytv_0.4.0_all.ipk
+npx ares-install --device tv packages/org.personal.movytv_0.4.1_all.ipk
 npx ares-launch --device tv org.personal.movytv
 ```
 
@@ -46,12 +46,12 @@ La base Movy et le menu autonome ont été essayés par l'utilisateur sur **LG C
 | --- | --- | --- |
 | [Movy](https://www.movy.sx/fr) | Racine Next.js ; défilement et menu TV | Réglage natif de session initialisé à désactivé |
 | [Cinejoy](https://cinejoy.pk/) | Racine Svelte ; défilement et menu TV | Réglage local natif `addies` initialisé à désactivé |
-| [7movies](https://7movies.ac/) | Élément principal Next.js ; défilement et menu TV | Réglage natif « off for this visit » initialisé |
+| [7movies](https://7movies.ac/) | Page entière, sans déplacer les éléments React ; menu TV | Réglage natif + blocage ciblé des deux chargeurs de pubs identifiés |
 | [Bingebox](https://bingebox.ac/) | Tuile ajoutée ; adaptation générique après accès au contenu | Aucun réglage natif vérifié pour l'instant |
 
 Pour les trois réglages identifiés, une préférence explicite déjà présente est respectée. La protection contre les nouvelles fenêtres est ajoutée au document principal. Les annonces incluses dans les lecteurs externes ne sont pas garanties supprimées.
 
-Pendant l'inspection, Bingebox a présenté une vérification Cloudflare au lieu de son contenu. L'application ne contourne pas cette vérification et n'y injecte pas ses commandes. Son interface, ses lecteurs et son réglage publicitaire ne sont donc pas présentés comme validés. Une tuile supplémentaire ne garantit pas la disponibilité du service.
+Pendant l'inspection, Bingebox a présenté une vérification Cloudflare au lieu de son contenu. La vérification bloque également l’accès sur la TV testée. Un bandeau permet de choisir une autre plateforme, sans modifier ni résoudre le défi. Son interface, ses lecteurs et son réglage publicitaire ne sont donc pas présentés comme validés. Une tuile supplémentaire ne garantit pas la disponibilité du service.
 
 ## Architecture
 

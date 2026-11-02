@@ -14,8 +14,8 @@ function setup({last=null,fail=false}={}){
   vm.runInNewContext(source,{window,document,localStorage:{getItem:key=>store.get(key)||null,setItem:(key,value)=>store.set(key,value)}});
   return{calls,buttons,document,status,store,listeners};
 }
-test('opening the app shows four choices without opening a platform automatically',()=>{
-  const ctx=setup();assert.equal(ctx.buttons.length,4);assert.deepEqual(ctx.calls,[]);assert.equal(ctx.document.activeElement.id,'movy');
+test('opening the app shows three choices without opening a platform automatically',()=>{
+  const ctx=setup();assert.equal(ctx.buttons.length,3);assert.deepEqual(ctx.calls,[]);assert.equal(ctx.document.activeElement.id,'movy');
 });
 test('every platform tile opens its exact HTTPS homepage directly',()=>{
   const ctx=setup();ctx.buttons.forEach(button=>button.onclick());assert.deepEqual(ctx.calls,platforms.map(p=>p.home));

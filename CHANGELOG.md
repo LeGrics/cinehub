@@ -1,5 +1,11 @@
 # Versions
 
+## 0.4.2 — Trois plateformes
+
+- Retrait de Bingebox : tuile, profil, icône et bandeau de vérification.
+- Accueil réorganisé autour de Movy, Cinejoy et 7movies.
+- Menu des plateformes limité à ces trois sites.
+
 ## 0.4.1 — Correctifs 7movies et accès bloqué
 
 - 7movies : défilement du document entier, sans déplacer un `main` provisoire que Next.js remplace ensuite.

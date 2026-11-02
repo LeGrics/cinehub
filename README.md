@@ -1,12 +1,12 @@
 # CinéHub pour LG webOS
 
-Un accueil TV avec quatre plateformes : **Movy, Cinejoy, 7movies et Bingebox**. Choisir une tuile ouvre directement l'accueil du site. Après installation, aucun PC n'est nécessaire.
+Un accueil TV avec trois plateformes : **Movy, Cinejoy et 7movies**. Choisir une tuile ouvre directement l'accueil du site. Après installation, aucun PC n'est nécessaire.
 
 L'application s'appelait Movy TV. Son identifiant reste `org.personal.movytv` pour permettre une mise à jour de l'installation existante ; son nom dans l'accueil LG devient **CinéHub**. Le dépôt est disponible à l’adresse `LeGrics/cinehub`.
 
 ## Installation
 
-**[Télécharger CinéHub 0.4.1 (.ipk)](https://github.com/LeGrics/cinehub/raw/refs/heads/main/packages/org.personal.movytv_0.4.1_all.ipk)**
+**[Télécharger CinéHub 0.4.2 (.ipk)](https://github.com/LeGrics/cinehub/raw/refs/heads/main/packages/org.personal.movytv_0.4.2_all.ipk)**
 
 **[Guide pour activer Developer Mode et installer l'application](docs/INSTALLATION-LG.md)**
 
@@ -21,7 +21,7 @@ npm run build
 Une fois la TV enregistrée sous le nom `tv` :
 
 ```powershell
-npx ares-install --device tv packages/org.personal.movytv_0.4.1_all.ipk
+npx ares-install --device tv packages/org.personal.movytv_0.4.2_all.ipk
 npx ares-launch --device tv org.personal.movytv
 ```
 
@@ -29,7 +29,7 @@ Le build crée également le paquet dans `dist/`. Le paquet 0.3.0 reste disponib
 
 ## Utilisation
 
-- Au lancement, choisir l'une des quatre tuiles au pointeur ou avec les flèches + OK.
+- Au lancement, choisir l'une des trois tuiles au pointeur ou avec les flèches + OK.
 - Chaque tuile ouvre le véritable site en HTTPS, sur son accueil. Les comptes et les lecteurs restent ceux du site.
 - Pour défiler : tourner la molette. Les flèches déplacent le focus entre les contrôles.
 - Pour afficher les commandes : approcher le pointeur du bord droit. Le petit menu se masque après 3,5 secondes sans interaction.
@@ -40,24 +40,22 @@ La dernière plateforme choisie est mémorisée pour replacer le focus sur sa tu
 
 ## Compatibilité et publicités
 
-La base Movy et le menu autonome ont été essayés par l'utilisateur sur **LG C5 avec MR25GA**. L'accueil à quatre plateformes, la navigation et les adaptateurs ont été vérifiés sur PC. Les lecteurs des nouvelles plateformes restent à valider sur la TV.
+La base Movy et le menu autonome ont été essayés par l'utilisateur sur **LG C5 avec MR25GA**. L'accueil à trois plateformes, la navigation et les adaptateurs ont été vérifiés sur PC. L’utilisateur confirme le fonctionnement des trois plateformes sur sa TV.
 
 | Plateforme | Adaptation | Réglage publicitaire |
 | --- | --- | --- |
 | [Movy](https://www.movy.sx/fr) | Racine Next.js ; défilement et menu TV | Réglage natif de session initialisé à désactivé |
 | [Cinejoy](https://cinejoy.pk/) | Racine Svelte ; défilement et menu TV | Réglage local natif `addies` initialisé à désactivé |
 | [7movies](https://7movies.ac/) | Page entière, sans déplacer les éléments React ; menu TV | Réglage natif + blocage ciblé des deux chargeurs de pubs identifiés |
-| [Bingebox](https://bingebox.ac/) | Tuile ajoutée ; adaptation générique après accès au contenu | Aucun réglage natif vérifié pour l'instant |
 
 Pour les trois réglages identifiés, une préférence explicite déjà présente est respectée. La protection contre les nouvelles fenêtres est ajoutée au document principal. Les annonces incluses dans les lecteurs externes ne sont pas garanties supprimées.
 
-Pendant l'inspection, Bingebox a présenté une vérification Cloudflare au lieu de son contenu. La vérification bloque également l’accès sur la TV testée. Un bandeau permet de choisir une autre plateforme, sans modifier ni résoudre le défi. Son interface, ses lecteurs et son réglage publicitaire ne sont donc pas présentés comme validés. Une tuile supplémentaire ne garantit pas la disponibilité du service.
 
 ## Architecture
 
 ```text
 app/platforms.js  Domaines autorisés, accueils, icônes et profils des sites
-app/              Accueil à quatre tuiles et métadonnées webOS
+app/              Accueil à trois tuiles et métadonnées webOS
 native/           Défilement, focus, menu TV et choix des plateformes
 scripts/          Assemblage du userscript, icônes et paquet IPK
 tests/            Sélection des plateformes, profils, stockage et garde-fous
@@ -70,6 +68,7 @@ Les améliorations sont limitées aux domaines explicitement listés et au docum
 
 `npm run preview` affiche le lanceur sur `http://127.0.0.1:8790`. Un navigateur PC ne reproduit pas le chargement automatique du userscript par webOS.
 
-Les favicons de Movy, Cinejoy et 7movies proviennent des sites concernés. Bingebox utilise un monogramme local de remplacement, son icône n'ayant pas pu être vérifiée pendant l'inspection.
 
 Projet indépendant, sans affiliation avec LG ou les plateformes. Aucun contenu vidéo, mot de passe, passphrase Developer Mode ou configuration personnelle de TV n'est inclus.
+
+Les favicons de Movy, Cinejoy et 7movies proviennent des sites concernés.

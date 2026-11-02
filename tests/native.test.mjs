@@ -35,6 +35,3 @@ test('7movies uses its verified native session ad-free preference',()=>{
   assert.equal(ctx.reloads.length,1);assert.equal(ctx.styles.length,0);
   vm.runInNewContext(bundle,ctx.scope);assert.equal(ctx.reloads.length,1);assert.equal(ctx.styles.length,1);
 });
-test('Bingebox security verification is left untouched',()=>{
-  const ctx=context({host:'bingebox.ac',title:'Just a moment...'});vm.runInNewContext(bundle,ctx.scope);ctx.listeners.DOMContentLoaded();assert.equal(ctx.styles.length,0);assert.equal(ctx.scope.window.__movyTvInstalled,undefined);assert.equal(ctx.store.size,0);
-});

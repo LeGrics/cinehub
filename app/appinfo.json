@@ -1,13 +1,13 @@
 {
   "id": "org.personal.movytv",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "vendor": "Personal project",
   "type": "web",
   "main": "index.html",
   "title": "CinéHub",
   "icon": "icon.png",
   "largeIcon": "largeIcon.png",
-  "appDescription": "Quatre plateformes avec navigation TV autonome",
+  "appDescription": "Trois plateformes avec navigation TV autonome",
   "resolution": "1920x1080",
   "disableBackHistoryAPI": false,
   "requiredACG": []

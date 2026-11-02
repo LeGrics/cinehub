@@ -4,16 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'">
-  <title>Movy TV</title>
+  <title>CinéHub</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
-    <header><span class="mark">M<span>▶</span></span><span>MOVY / TV</span><span class="badge">VERSION 0.3.0</span></header>
-    <h1>Ouverture<br>de <em>Movy…</em></h1>
-    <p id="status" role="status">Ouverture de Movy…</p>
-    <button id="direct" class="card primary" hidden><strong>Réessayer →</strong></button>
+    <header><span class="mark">C<span>▶</span></span><span>CINÉHUB</span><span class="badge">VERSION 0.4</span></header>
+    <div class="eyebrow">TON CINÉMA, SUR GRAND ÉCRAN</div>
+    <h1>Choisis ta <em>plateforme.</em></h1>
+    <p class="intro">Un site ne répond plus ? Essaie-en un autre.</p>
+    <section class="platforms" aria-label="Plateformes">
+      <button class="platform-card" data-platform="movy"><img src="platform-icons/movy.svg" alt=""><strong>Movy</strong><span>Ouvrir l’accueil →</span></button>
+      <button class="platform-card" data-platform="cinejoy"><img src="platform-icons/cinejoy.ico" alt=""><strong>Cinejoy</strong><span>Ouvrir l’accueil →</span></button>
+      <button class="platform-card" data-platform="7movies"><img src="platform-icons/7movies.ico" alt=""><strong>7movies</strong><span>Ouvrir l’accueil →</span></button>
+      <button class="platform-card" data-platform="bingebox"><img src="platform-icons/bingebox.svg" alt=""><strong>Bingebox</strong><span>Ouvrir l’accueil →</span></button>
+    </section>
+    <p class="hint">Pointeur ou flèches + OK · Commandes TV au bord droit dans les sites · Sans PC</p>
+    <p id="status" role="status"></p>
   </main>
-  <script src="app.js"></script>
+  <script src="platforms.js"></script><script src="navigation.js"></script><script src="app.js"></script>
 </body>
 </html>

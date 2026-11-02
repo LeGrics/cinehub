@@ -14,10 +14,10 @@
     dockTimer=setTimeout(hideDock,3500);
   }
   function installScroller(){
-    var next=document.getElementById('__next');
+    var next=null;cineHubPlatform.roots.some(function(selector){next=document.querySelector(selector);return !!next;});
     if(!next)return false;
     scroller=document.getElementById('movy-tv-scroll');
-    if(!scroller){scroller=document.createElement('div');scroller.id='movy-tv-scroll';scroller.setAttribute('aria-label','Catalogue Movy');next.parentNode.insertBefore(scroller,next);scroller.appendChild(next);}
+    if(!scroller){scroller=document.createElement('div');scroller.id='movy-tv-scroll';scroller.setAttribute('aria-label','Catalogue '+cineHubPlatform.name);next.setAttribute('data-cinehub-root','');next.parentNode.insertBefore(scroller,next);scroller.appendChild(next);}
     return true;
   }
   function toast(message){
@@ -55,7 +55,7 @@
     var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
     var url;try{url=new URL(a.href,location.href);}catch(_){return;}
     if(url.origin===location.origin){if(a.target==='_blank')a.target='_self';return;}
-    if(url.hostname==='www.movy.sx'||url.hostname==='movy.sx'){e.preventDefault();location.assign(url.pathname+url.search);return;}
+    if(cineHubPlatform.hosts.indexOf(url.hostname)>=0){e.preventDefault();location.assign(url.href);return;}
     e.preventDefault();e.stopImmediatePropagation();toast('Lien externe bloqué dans ce mode');
   },true);
   window.addEventListener('keydown',function(e){
@@ -84,10 +84,23 @@
       var observer=new MutationObserver(function(){if(installScroller())observer.disconnect();});
       observer.observe(document.body,{childList:true,subtree:true});
     }
-    panel=document.createElement('div');panel.id='movy-tv-panel';panel.hidden=true;panel.setAttribute('role','region');panel.setAttribute('aria-label','Commandes Movy TV');
-    panel.innerHTML='<strong>Movy TV 0.3.0 · autonome</strong><div><button data-action="close">Continuer</button><button data-action="down">Descendre ↓</button><button data-action="up">Remonter ↑</button><button data-action="home">Accueil</button><button data-action="reload">Recharger</button></div><p>Molette : défiler · Flèches + OK : navigation · Approcher le pointeur du bord droit : Menu TV · Retour : historique webOS.</p><p>Commandes embarquées dans la TV. Aucun relais PC utilisé.</p>';
+    panel=document.createElement('div');panel.id='movy-tv-panel';panel.hidden=true;panel.setAttribute('role','region');panel.setAttribute('aria-label','Commandes CinéHub');
+    function menu(){panel.innerHTML='<strong>CinéHub · '+cineHubPlatform.name+'</strong><div><button data-action="close">Continuer</button><button data-action="platforms">Plateformes</button><button data-action="down">Descendre ↓</button><button data-action="up">Remonter ↑</button><button data-action="home">Accueil</button><button data-action="reload">Recharger</button></div><p>Molette : défiler · Flèches + OK : navigation · Pointeur au bord droit : Menu TV · Retour : historique webOS.</p>';}
+    menu();
     document.body.appendChild(panel);
-    panel.addEventListener('click',function(e){var action=e.target.getAttribute('data-action');if(action==='close')toggle();if(action==='up'||action==='down'){toggle();scrollPage(document.body,0,(action==='up'?-1:1)*window.innerHeight*.7);}if(action==='home')location.assign('/fr');if(action==='reload')location.reload();if(action==='direct')location.assign('https://www.movy.sx'+location.pathname+location.search);});
+    panel.addEventListener('click',function(e){
+      var button=e.target.closest('button');if(!button)return;var action=button.getAttribute('data-action');
+      if(action==='close'){menu();toggle();}
+      if(action==='up'||action==='down'){toggle();scrollPage(document.body,0,(action==='up'?-1:1)*window.innerHeight*.7);}
+      if(action==='home')location.assign(cineHubPlatform.home);
+      if(action==='reload')location.reload();
+      if(action==='menu'){menu();panel.querySelector('button').focus();}
+      if(action==='platforms'){
+        panel.innerHTML='<strong>CinéHub · Choisir une plateforme</strong><div></div><button data-action="menu">Retour au menu</button>';
+        var list=panel.querySelector('div');window.CineHubPlatforms.forEach(function(platform){var item=document.createElement('button');item.textContent=platform.name;item.setAttribute('data-platform',platform.id);list.appendChild(item);});panel.querySelector('button').focus();
+      }
+      var selected=button.getAttribute('data-platform');if(selected){var destination=window.CineHubPlatforms.find(function(platform){return platform.id===selected;});if(destination)location.assign(destination.home);}
+    });
     dock=document.createElement('nav');dock.id='movy-tv-dock';dock.hidden=true;dock.setAttribute('aria-label','Commandes TV');
     dock.innerHTML='<button data-action="menu" aria-label="Ouvrir le menu TV">Menu TV</button><button data-action="up" aria-label="Remonter d’une page">↑</button><button data-action="down" aria-label="Descendre d’une page">↓</button>';
     document.body.appendChild(dock);
@@ -105,7 +118,7 @@
       else if(action==='up'||action==='down'){if(!panel.hidden)toggle();scrollPage(document.body,0,(action==='up'?-1:1)*window.innerHeight*.7);}
     });
     document.addEventListener('fullscreenchange',function(){clearTimeout(dockTimer);dock.hidden=true;if(document.fullscreenElement)panel.hidden=true;});
-    toast('Movy TV 0.3.0 · pointeur au bord droit pour le menu');
+    toast('CinéHub · '+cineHubPlatform.name+' · menu au bord droit');
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

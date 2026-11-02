@@ -1,8 +1,8 @@
 {
   "name": "lg-movy",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
-  "description": "Application personnelle autonome Movy pour LG webOS",
+  "description": "CinéHub : lanceur autonome de plateformes pour LG webOS",
   "engines": {
     "node": ">=20"
   },

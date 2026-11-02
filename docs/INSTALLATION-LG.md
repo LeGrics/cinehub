@@ -1,4 +1,4 @@
-# Installer LG Movy avec Developer Mode
+# Installer CinéHub avec Developer Mode
 
 Ce guide concerne les TV LG webOS. La base du projet a été essayée sur LG C5 avec Magic Remote MR25GA. Il ne demande pas de root.
 
@@ -34,9 +34,9 @@ npm run build
 npx ares-config --profile tv
 ```
 
-Le build crée `dist/org.personal.movytv_0.3.0_all.ipk`. Si un IPK compilé est fourni séparément, il peut aussi être utilisé directement avec les outils LG déjà installés.
+Le build crée `dist/org.personal.movytv_0.4.0_all.ipk`. Si un IPK compilé est fourni séparément, il peut aussi être utilisé directement avec les outils LG déjà installés.
 
-Un paquet déjà compilé est fourni dans `packages/org.personal.movytv_0.3.0_all.ipk`. Pour l'utiliser, installer les outils avec `npm ci`, sélectionner le profil TV, puis remplacer le chemin `dist/…` par `packages/…` dans la commande d'installation. Les étapes `npm test` et `npm run build` ne sont nécessaires que pour reconstruire/valider les sources.
+Un paquet déjà compilé est fourni dans `packages/org.personal.movytv_0.4.0_all.ipk`. Pour l'utiliser, installer les outils avec `npm ci`, sélectionner le profil TV, puis remplacer le chemin `dist/…` par `packages/…` dans la commande d'installation. Les étapes `npm test` et `npm run build` ne sont nécessaires que pour reconstruire/valider les sources.
 
 ## 4. Enregistrer la TV sur le PC
 
@@ -66,11 +66,11 @@ Saisir la passphrase affichée sur la TV quand l'outil la demande. Si le PC ne t
 ## 5. Installer et lancer Movy TV
 
 ```powershell
-npx ares-install --device tv dist/org.personal.movytv_0.3.0_all.ipk
+npx ares-install --device tv dist/org.personal.movytv_0.4.0_all.ipk
 npx ares-launch --device tv org.personal.movytv
 ```
 
-L'application apparaît sous le nom **Movy TV** dans l'accueil LG. Elle ouvre Movy automatiquement. Après installation, le PC peut être éteint.
+L'application apparaît sous le nom **CinéHub** dans l'accueil LG. Choisir une tuile ouvre directement l’accueil de la plateforme. Après installation, le PC peut être éteint.
 
 Les commandes latérales sont cachées par défaut. Approcher le pointeur du bord droit pour les faire apparaître, ou utiliser Flèche droite depuis le dernier contrôle à droite du contenu.
 

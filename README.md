@@ -1,31 +1,16 @@
-# LG Movy
+# CinéHub pour LG webOS
 
-Application personnelle non officielle pour regarder Movy sur une TV LG webOS, avec navigation adaptée à la Magic Remote. Après installation, **Movy s'ouvre directement et le PC peut être éteint**.
+Un accueil TV avec quatre plateformes : **Movy, Cinejoy, 7movies et Bingebox**. Choisir une tuile ouvre directement l'accueil du site. Après installation, aucun PC n'est nécessaire.
 
-## Fonctionnalités
+L'application s'appelait Movy TV. Son identifiant reste `org.personal.movytv` pour permettre une mise à jour de l'installation existante ; son nom dans l'accueil LG devient **CinéHub**. Le dépôt conserve son adresse `lg-movy`.
 
-- Ouverture automatique de Movy au lancement.
-- Défilement du catalogue à la molette et navigation aux flèches + OK.
-- Menu TV discret : approcher le pointeur du bord droit pour afficher Menu TV, ↑ et ↓. Le menu disparaît après 3,5 secondes sans interaction.
-- Accès au menu avec Flèche droite depuis le contrôle le plus à droite du contenu.
-- Réglage natif des publicités initialisé à désactivé pour les nouvelles sessions. Une préférence explicite déjà présente dans la session est préservée.
-- Aucun relais PC, serveur local, compte supplémentaire ou root nécessaire pour la voie Developer Mode.
+## Installation
 
-La base autonome a été essayée par l'utilisateur sur une **LG C5 avec MR25GA**. L'ouverture automatique de la version 0.3.0 est compilée et testée localement ; son essai matériel reste à confirmer. Les autres TV et firmwares ne sont pas validés.
+**[Télécharger CinéHub 0.4.0 (.ipk)](https://github.com/LeGrics/lg-movy/raw/refs/heads/main/packages/org.personal.movytv_0.4.0_all.ipk)**
 
-Les publicités intégrées aux lecteurs tiers ne sont pas garanties supprimées. L'application dépend du site Movy et peut demander des adaptations si son interface change. Elle ne fournit ni catalogue indépendant ni hébergement des vidéos.
+**[Guide pour activer Developer Mode et installer l'application](docs/INSTALLATION-LG.md)**
 
-## Installer sur la TV
-
-**[Télécharger le paquet TV 0.3.0 (.ipk)](https://github.com/LeGrics/lg-movy/raw/refs/heads/main/packages/org.personal.movytv_0.3.0_all.ipk)**
-
-Le paquet compilé est fourni dans `packages/`. Il évite de reconstruire le projet pour installer cette version.
-
-Le guide détaillé explique comment créer/utiliser le compte LG Developer, activer Developer Mode, connecter la TV au PC et installer le paquet :
-
-**[Guide d'installation et activation du mode développeur](docs/INSTALLATION-LG.md)**
-
-Pour construire le paquet depuis les sources, installer Node.js 20 ou supérieur, puis lancer dans ce dossier :
+Pour reconstruire le paquet : Node.js 20 ou supérieur, puis dans ce dossier :
 
 ```powershell
 npm ci
@@ -33,50 +18,58 @@ npm test
 npm run build
 ```
 
-Le fichier produit est `dist/org.personal.movytv_0.3.0_all.ipk`.
-
-Une fois la TV configurée sous le nom `tv` :
+Une fois la TV enregistrée sous le nom `tv` :
 
 ```powershell
-npx ares-install --device tv dist/org.personal.movytv_0.3.0_all.ipk
+npx ares-install --device tv packages/org.personal.movytv_0.4.0_all.ipk
 npx ares-launch --device tv org.personal.movytv
 ```
 
-La session Developer Mode doit rester valide : penser à la prolonger dans l'application LG. Le PC n'est nécessaire que pour installer, mettre à jour ou diagnostiquer.
+Le build crée également le paquet dans `dist/`. Le paquet 0.3.0 reste disponible dans `packages/` pour revenir à la version Movy seule si nécessaire.
 
 ## Utilisation
 
-Lancer **Movy TV** depuis l'accueil LG : le site s'ouvre automatiquement.
+- Au lancement, choisir l'une des quatre tuiles au pointeur ou avec les flèches + OK.
+- Chaque tuile ouvre le véritable site en HTTPS, sur son accueil. Les comptes et les lecteurs restent ceux du site.
+- Pour défiler : tourner la molette. Les flèches déplacent le focus entre les contrôles.
+- Pour afficher les commandes : approcher le pointeur du bord droit. Le petit menu se masque après 3,5 secondes sans interaction.
+- Dans **Menu TV → Plateformes**, choisir un autre site sans relancer l'application. **Accueil** retourne à l'accueil de la plateforme courante.
+- Retour suit l'historique webOS. Aucun bouton de couleur n'est nécessaire sur la MR25GA.
 
-| Action | Commande |
-| --- | --- |
-| Parcourir les éléments | Pointeur ou flèches |
-| Sélectionner | Appuyer sur la molette / OK |
-| Défiler | Tourner la molette |
-| Afficher les commandes TV | Approcher le pointeur du bord droit |
-| Descendre / remonter d'une page | Boutons ↓ / ↑ du menu latéral |
-| Revenir en arrière | Retour |
+La dernière plateforme choisie est mémorisée pour replacer le focus sur sa tuile au prochain lancement ; elle n'est pas ouverte automatiquement. Si un site ne répond plus, relancer CinéHub permet toujours de choisir une autre tuile. Aucun basculement automatique ne prétend détecter les pannes externes.
 
-Les commandes ne nécessitent pas de boutons de couleur. Elles ne sont pas injectées dans les lecteurs tiers. Le menu latéral reste caché pendant le plein écran natif d'une vidéo.
+## Compatibilité et publicités
 
-## Développement
+La base Movy et le menu autonome ont été essayés par l'utilisateur sur **LG C5 avec MR25GA**. L'accueil à quatre plateformes, la navigation et les adaptateurs ont été vérifiés sur PC. Les lecteurs des nouvelles plateformes restent à valider sur la TV.
+
+| Plateforme | Adaptation | Réglage publicitaire |
+| --- | --- | --- |
+| [Movy](https://www.movy.sx/fr) | Racine Next.js ; défilement et menu TV | Réglage natif de session initialisé à désactivé |
+| [Cinejoy](https://cinejoy.pk/) | Racine Svelte ; défilement et menu TV | Réglage local natif `addies` initialisé à désactivé |
+| [7movies](https://7movies.ac/) | Élément principal Next.js ; défilement et menu TV | Réglage natif « off for this visit » initialisé |
+| [Bingebox](https://bingebox.ac/) | Tuile ajoutée ; adaptation générique après accès au contenu | Aucun réglage natif vérifié pour l'instant |
+
+Pour les trois réglages identifiés, une préférence explicite déjà présente est respectée. La protection contre les nouvelles fenêtres est ajoutée au document principal. Les annonces incluses dans les lecteurs externes ne sont pas garanties supprimées.
+
+Pendant l'inspection, Bingebox a présenté une vérification Cloudflare au lieu de son contenu. L'application ne contourne pas cette vérification et n'y injecte pas ses commandes. Son interface, ses lecteurs et son réglage publicitaire ne sont donc pas présentés comme validés. Une tuile supplémentaire ne garantit pas la disponibilité du service.
+
+## Architecture
 
 ```text
-app/        Entrée de l'application webOS, métadonnées et ressources
-native/     Navigation, défilement et menu embarqués
-scripts/    Génération des icônes, assemblage et compilation IPK
-tests/      Tests locaux du script embarqué et du démarrage
-docs/       Installation et diagnostic
+app/platforms.js  Domaines autorisés, accueils, icônes et profils des sites
+app/              Accueil à quatre tuiles et métadonnées webOS
+native/           Défilement, focus, menu TV et choix des plateformes
+scripts/          Assemblage du userscript, icônes et paquet IPK
+tests/            Sélection des plateformes, profils, stockage et garde-fous
+docs/             Installation et état des adaptations
 ```
 
-`npm run build` assemble les sources dans `app/webOSUserScripts/userScript.js`, puis utilise le CLI officiel LG pour créer l'IPK. Le fichier assemblé est généré et ignoré par Git.
+`npm run build` génère `app/webOSUserScripts/userScript.js`. Le mécanisme est décrit par [webOS Homebrew](https://www.webosbrew.org/develop/guides/web-app/) ; il permet de charger les améliorations dans les sites directs, sans relais ni changement d'origine. Ce mécanisme non documenté par le SDK public LG peut varier selon le firmware.
 
-Le mécanisme de userscript est décrit par [webOS Homebrew](https://www.webosbrew.org/develop/guides/web-app/). Il permet de charger le correctif sur le site direct, en gardant son origine HTTPS. Aucune réécriture de flux, modification de CORS ou permission système supplémentaire n'est ajoutée. Cette fonctionnalité n'est pas garantie par le SDK public LG sur tous les firmwares.
+Les améliorations sont limitées aux domaines explicitement listés et au document principal. Elles ne sont pas injectées dans les lecteurs tiers. Les réglages natifs des publicités ont été identifiés dans les ressources publiques des sites ; aucun accès à une API privée ou flux protégé n'est ajouté.
 
-`npm run preview` prévisualise uniquement l'écran de transition local, avec ouverture automatique du site. Un navigateur PC ne charge pas automatiquement les userscripts du paquet comme le moteur webOS.
+`npm run preview` affiche le lanceur sur `http://127.0.0.1:8790`. Un navigateur PC ne reproduit pas le chargement automatique du userscript par webOS.
 
-## Signaler un problème
+Les favicons de Movy, Cinejoy et 7movies proviennent des sites concernés. Bingebox utilise un monogramme local de remplacement, son icône n'ayant pas pu être vérifiée pendant l'inspection.
 
-Indiquer le modèle de TV, la version webOS/firmware, la version de l'application, les étapes de reproduction et le texte d'erreur. Préciser si le même titre fonctionne sur Movy dans le navigateur de la TV. Ne pas joindre de mot de passe, passphrase Developer Mode, clé SSH ou lien vidéo contenant des jetons.
-
-Projet indépendant, sans affiliation avec LG ou Movy. Aucune vidéo, aucun identifiant et aucune configuration de TV personnelle ne sont inclus dans ce dépôt.
+Projet indépendant, sans affiliation avec LG ou les plateformes. Aucun contenu vidéo, mot de passe, passphrase Developer Mode ou configuration personnelle de TV n'est inclus.

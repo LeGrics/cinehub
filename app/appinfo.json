@@ -1,0 +1,14 @@
+{
+  "id": "org.personal.movytv",
+  "version": "0.3.0",
+  "vendor": "Personal project",
+  "type": "web",
+  "main": "index.html",
+  "title": "Movy TV",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "appDescription": "Movy avec navigation TV autonome experimentale",
+  "resolution": "1920x1080",
+  "disableBackHistoryAPI": false,
+  "requiredACG": []
+}

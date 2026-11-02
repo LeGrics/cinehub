@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.npm-cache/
+app/webOSUserScripts/
+.env
+.env.*
+*.log
+*.pem
+*.key
+.webos/
+.ssh/
+.DS_Store
